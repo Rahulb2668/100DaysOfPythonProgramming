@@ -1,16 +1,35 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+from tkinter import *
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+def calculate_km():
+    input_value = int(user_input.get())
+    km_answer.config(text=input_value*1.609)
+
+window = Tk()
+window.minsize(width=300, height=200)
+window.config(padx=20, pady=20)
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+user_input = Entry(width=10)
+user_input.grid(row=1, column=2)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+text = Label()
+text.config(text="miles")
+text.grid(row=1, column=3)
+
+
+text_equal = Label()
+text_equal.config(text ="is equal to")
+text_equal.grid(row=2, column=1)
+
+km_answer = Label()
+km_answer.grid(row=2, column=2)
+
+km_text = Label()
+km_text.config(text = "kms")
+km_text.grid(row=2, column=3)
+
+
+calculate = Button(text="Calculate", command=calculate_km)
+calculate.grid(row=3, column=2)
+window.mainloop()
