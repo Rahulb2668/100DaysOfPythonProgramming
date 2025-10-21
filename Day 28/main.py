@@ -67,6 +67,8 @@ window.title("Pomodoro")
 window.config(padx=100, pady=100, bg=YELLOW)
 
 
+
+
 canvas = Canvas(width=210 , height=224, bg=YELLOW, borderwidth=0)
 bg_image = PhotoImage(file="tomato.png")
 canvas.create_image(103, 112, image=bg_image)
