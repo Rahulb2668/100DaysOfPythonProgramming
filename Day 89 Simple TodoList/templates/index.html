@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        
+        <!-- Add Todo Form -->
+        {% if current_user.is_authenticated %}
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
+                <form action="{{ url_for('get_all_todo') }}" method="POST" class="d-flex">
+                    <input type="text" class="form-control me-2" name="content" placeholder="What needs to be done?" required>
+                    <button type="submit" class="btn btn-success">Add</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Todo List -->
+        <ul class="list-group shadow-sm">
+            {% for todo in todos %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ todo.content }}
+                
+                <div class="btn-group">
+                    <!-- Update Button -->
+                    <a href="{{ url_for('update_todo', todoid=todo.id) }}" class="btn btn-sm btn-outline-primary">Update</a>
+                    <!-- Delete Button using a form to trigger a POST request -->
+                    <form action="{{ url_for('delete_todo', todoid=todo.id) }}" method="POST" class="d-inline">
+                        <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                    </form>
+                </div>
+            </li>
+            {% else %}
+            <li class="list-group-item text-center text-muted">No todos yet. Add one above!</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <!-- View for unauthenticated users -->
+        <div class="text-center mt-5">
+            <h2>Welcome to the Todo App</h2>
+            <p class="lead">Please <a href="{{ url_for('login') }}">login</a> or <a href="{{ url_for('register') }}">register</a> to manage your todos.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
